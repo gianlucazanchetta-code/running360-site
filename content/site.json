@@ -1,0 +1,19 @@
+{
+  "hero_title": "Consulenza e supporto per la gestione di team ed eventi running",
+  "hero_subtitle": "Dal piano all'esecuzione: aiutiamo aziende, ASD e organizzazioni a progettare iniziative nel mondo della corsa.",
+  "availability": "Disponibilità per nuovi progetti da gennaio.",
+  "services": [
+    {
+      "title": "Consulenza organizzativa",
+      "desc": "Processi, ruoli, KPI"
+    },
+    {
+      "title": "Eventi end‑to‑end",
+      "desc": "Permessi, logistica, sicurezza"
+    },
+    {
+      "title": "Formazione & coaching",
+      "desc": "Workshop e coaching operativi"
+    }
+  ]
+}
