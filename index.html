@@ -1,23 +1,5 @@
 <!doctype html>
-<html lang="it"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Running 360</title>
-<link rel="stylesheet" href="/assets/style.css">
-</head><body>
-<div class="container">
-  <h1 id="hero_title">Titolo</h1>
-  <p id="hero_subtitle">Sottotitolo</p>
-  <p id="availability"></p>
-  <h2>Servizi</h2>
-  <div id="services"></div>
-</div>
-<script>
-async function go(){
-  const r=await fetch('/content/site.json', {cache:'no-store'}); const d=await r.json();
-  const S=(i,v)=>{const e=document.getElementById(i); if(e) e.textContent=v;};
-  S('hero_title', d.hero_title); S('hero_subtitle', d.hero_subtitle); S('availability', d.availability);
-  const box=document.getElementById('services'); box.innerHTML=''; (d.services||[]).forEach(s=>{const p=document.createElement('p'); p.textContent='• '+s.title+': '+s.desc; box.appendChild(p);});
-}
-document.addEventListener('DOMContentLoaded', go);
-</script>
-</body></html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Admin</title>
+<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+</head><body></body></html>
