@@ -1,5 +1,71 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
-<title>Admin</title>
-<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-</head><body></body></html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Running360</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    /* fallback minimale nel caso lo style.css non sia caricato */
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; margin: 0; color: #0f172a; }
+    header, main { max-width: 1120px; margin: 0 auto; padding: 1.25rem; }
+    .hero { padding: 3rem 0 1rem; }
+    .hero h1 { margin: 0 0 .75rem; font-size: clamp(1.8rem, 3.5vw, 2.4rem); line-height: 1.2; }
+    .muted { color: #475569; }
+    .pill { display:inline-block; background:#eef2ff; color:#3730a3; padding:.35rem .65rem; border-radius:999px; font-size:.9rem; margin-top:.75rem; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1rem; margin-top: 1.25rem; }
+    .card { border:1px solid #e2e8f0; border-radius:12px; padding:1rem; background:#fff; }
+    footer { text-align:center; padding:2rem 1rem; color:#64748b; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <h1 id="hero_title">Running360</h1>
+      <p id="hero_subtitle" class="muted">Consulenza e supporto per la gestione di team ed eventi running.</p>
+      <div id="availability" class="pill">Disponibilità: —</div>
+    </div>
+  </header>
+
+  <main>
+    <h2>Servizi</h2>
+    <div id="services" class="grid"></div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Running360
+  </footer>
+
+  <script>
+    // Popola l'anno nel footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Carica i contenuti dal JSON
+    fetch('content/site.json')
+      .then(r => {
+        if (!r.ok) throw new Error('Impossibile caricare content/site.json');
+        return r.json();
+      })
+      .then(data => {
+        document.getElementById('hero_title').textContent = data.hero_title || 'Running360';
+        document.getElementById('hero_subtitle').textContent = data.hero_subtitle || '';
+        document.getElementById('availability').textContent = data.availability || '';
+
+        const wrap = document.getElementById('services');
+        wrap.innerHTML = '';
+        (data.services || []).forEach(s => {
+          const el = document.createElement('div');
+          el.className = 'card';
+          el.innerHTML = `<h3 style="margin:.2rem 0 .4rem">${s.title || ''}</h3>
+                          <p class="muted" style="margin:0">${s.desc || ''}</p>`;
+          wrap.appendChild(el);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        // Fallback visivo utile in debug
+        document.getElementById('availability').textContent = 'Contenuto non disponibile';
+      });
+  </script>
+</body>
+</html>
